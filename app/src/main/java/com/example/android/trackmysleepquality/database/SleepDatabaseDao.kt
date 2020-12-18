@@ -27,14 +27,15 @@ interface SleepDatabaseDao {
     @Update
     suspend fun updateSleep(night: SleepNight)
 
-    @Query("SELECT * FROM daily_sleep_quality_table WHERE sleepID = :sleepID")
+    @Query("SELECT * FROM daily_sleep_quality_table WHERE sleepId = :sleepID")
     suspend fun get(sleepID: Long): SleepNight?
 
     @Query("DELETE FROM daily_sleep_quality_table")
     suspend fun clear()
 
-    @Query("SELECT * FROM daily_sleep_quality_table ORDER BY sleepID DESC")
-    suspend fun getAllNights(sleepID: Long): LiveData<List<SleepNight>>
+    //Make this flow??
+    @Query("SELECT * FROM daily_sleep_quality_table ORDER BY sleepId DESC")
+    fun getAllNights(): LiveData<List<SleepNight>>
 
     @Query("SELECT * FROM daily_sleep_quality_table ORDER BY sleepId DESC LIMIT 1")
     suspend fun getTonight(): SleepNight?

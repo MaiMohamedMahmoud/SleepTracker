@@ -16,18 +16,21 @@
 
 package com.example.android.trackmysleepquality.database
 
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.android.parcel.Parcelize
 
 @Entity(tableName = "daily_sleep_quality_table")
+@Parcelize
 data class SleepNight(
         @PrimaryKey(autoGenerate = true)
         val sleepId: Long = 0L,
         @ColumnInfo(name = "start_time_milli")
         val startTime: Long = System.currentTimeMillis(),
         @ColumnInfo(name = "end_time_milli")
-        val endTime: Long = startTime,
+        var endTime: Long = startTime,
         @ColumnInfo(name = "quality_rating")
         val sleepQuality: Int = -1
-)
+):Parcelable
